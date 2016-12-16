@@ -50,7 +50,18 @@ $(document).ready(function() {
       $('.questions-container').prepend(response.responseText);
     })
   })
-  // $('.questions-container').on('click', '.delete-button', function())
+  $('.questions-container').on('click', '.delete-button', function(event){
+    event.preventDefault();
+    var question = $(this).closest('.question-box');
+    var questionId = $(this).closest('form').attr('action');
+
+    $.ajax({
+      method: "DELETE",
+      url: questionId
+    }).done(function(response){
+      $(question).remove();
+    })
+  })
 });
 
 var getLoginForm = function(){

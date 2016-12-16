@@ -41,10 +41,20 @@ delete '/questions/:id' do
   @question = Question.find_by(id: params[:id])
   if @question
     if logged_in? && current_user == @question.author
-      @question.destroy
-      redirect '/'
+      if request.xhr?
+        @question.destroy
+      else
+        @question.destroy
+        redirect '/'
+      end
     else
-      redirect '/'
+      if request.xhr?
+        @errors = @question.errors.full_messages
+        status 420
+        erb :'errors/_errors', layout: false
+      else
+        redirect '/errors/404'
+      end
     end
   else
     redirect '/'
