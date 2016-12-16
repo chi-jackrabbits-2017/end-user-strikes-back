@@ -1,5 +1,10 @@
+<h2>Questions</h2>
+
+<% if logged_in? %>
+  <span><button class="question-form-post-button" type="submit">post</button></span>
+<% end %>
+
 <div class="questions-container">
-  <h2>Questions</h2>
 
   <% if logged_in? %>
     <div class="post-question-form hide">

@@ -46,10 +46,10 @@
 }
 
 
-/*
+
 .hide {
   display: none;
-}*/
+}
 
 .delete-button {
   border: none;
@@ -69,6 +69,17 @@
 }
 
 .question-post-button:hover {
+  color: white;
+  background: skyblue;
+}
+
+.question-form-post-button {
+  border: none;
+  color: white;
+  background: black;
+}
+
+.question-form-post-button:hover {
   color: white;
   background: skyblue;
 }

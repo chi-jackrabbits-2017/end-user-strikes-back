@@ -19,17 +19,39 @@ post '/questions' do
   @question = Question.new(params[:question])
   @question.author = current_user
 
-  if logged_in?
-    if @question.save
-      redirect '/'
+  if @question.save && logged_in?
+    if request.xhr?
+      @question
+      erb :'/questions/_question_post', layout: false
     else
-      @questions = Question.order(created_at: :desc)
-      @errors = @question.errors.full_messages
-      erb :'questions/index'
+      redirect '/'
     end
   else
-    redirect '/'
+    if request.xhr?
+      @errors = @question.errors.full_messages
+      status 420
+      erb :'errors/_errors', layout: false
+    else
+      redirect '/errors/404'
+    end
   end
+
+  #   if @question.save
+  #     if request.xhr?
+  #       @question
+  #       erb :'/questions/_question_post', layout: false
+  #     else
+  #       redirect '/'
+  #     end
+  #     redirect '/'
+  #   else
+  #     @questions = Question.order(created_at: :desc)
+  #     @errors = @question.errors.full_messages
+  #     erb :'questions/index', layout: false
+  #   end
+  # else
+  #   redirect '/'
+  # end
 end
 
 delete '/questions/:id' do
