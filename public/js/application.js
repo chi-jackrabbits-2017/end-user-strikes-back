@@ -1,7 +1,71 @@
 $(document).ready(function() {
-  // This is called after the document has loaded in its entirety
-  // This guarantees that any elements we bind to will exist on the page
-  // when we try to bind to them
+  // Login Link Listener
+  $('a#login').on('click', function(e){
+    e.preventDefault();
+    if ($('form#login-form').is(":visible")){
+      // This catches the action if the Login form is already fetched to reduce
+      // Server load.
+      // This may be considered a work around here.
+    }else{
+      getLoginForm();
+    }
+  });
 
-  // See: http://docs.jquery.com/Tutorials:Introducing_$(document).ready()
+  // Login form submission listener
+  $('div#form-catcher').on('submit', '#login-form', function(e){
+    e.preventDefault();
+
+    var data = $(this).serialize();
+    loginUserIfValid(data)
+  })
+
+  $('a#logout').on('click', function(e){
+    e.preventDefault();
+
+    // Sends the logout request to the HREF of the link being clicked.
+    logoutUser(this.href);
+  });
 });
+
+var getLoginForm = function(){
+  $.ajax({
+    type: 'GET',
+    url: '/sessions/new'
+  })
+  .done(function(form){
+    // Sets the inner HTML of our catcher to the form served back.
+    $('div#form-catcher').html(form);
+  })
+  .fail(function(response){
+    (responseresponseText);
+    $('div#form-catcher').html(response.responseText);
+  });
+};
+
+// Called from above. Logs in users.
+var loginUserIfValid = function(data){
+  $.ajax({
+    type: 'POST',
+    url: '/sessions',
+    data: data
+  })
+  .done(function(jsonResponse){
+    // This will redirect the user to home when the response code is valid
+    window.location.replace(jsonResponse.redirect);
+  })
+  .fail(function(response){
+    // Resets the form and includes the errors this time.
+    $('#form-catcher').html(response.responseText);
+  });
+}
+
+// Called from above. Logs outs users.
+var logoutUser = function(url){
+  $.ajax({
+    type: 'DELETE',
+    url: url
+  })
+  .done(function(jsonResponse){
+    window.location.replace(jsonResponse.redirect)
+  });
+};

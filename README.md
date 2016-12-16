@@ -23,7 +23,7 @@ Group Members: mikejtaylor, kheer1, tylersmall19, jfrederick12
 
 * Enjoy the project
 
-* Allow time for other DBC work over weekend
+* Allow time for other DBC work over weekendf
   * All weekend work is _optional_
 
 * Checkin every 90-120 minutes (adjust as neccessary)
