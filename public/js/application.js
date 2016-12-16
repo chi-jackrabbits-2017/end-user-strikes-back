@@ -19,6 +19,13 @@ $(document).ready(function() {
     console.log(data)
     submitFormToServer(data)
   })
+
+  $('a#logout').on('click', function(e){
+    e.preventDefault();
+
+    // Sends the logout request to the HREF of the link being clicked.
+    logoutUser(this.href);
+  });
 });
 
 var getLoginForm = function(){
@@ -52,3 +59,13 @@ var submitFormToServer = function(data){
     $('#form-catcher').html(response.responseText);
   });
 }
+
+var logoutUser = function(url){
+  $.ajax({
+    type: 'DELETE',
+    url: url
+  })
+  .done(function(jsonResponse){
+    window.location.replace(jsonResponse.redirect)
+  });
+};

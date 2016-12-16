@@ -29,3 +29,15 @@ post '/sessions' do
     status 404
   end
 end
+
+# I don't think this is super RESTful. Any thoughts?
+delete '/sessions/:id' do
+  # Extra safe guard here. Might not be necessary?
+  if request.xhr? && logged_in?
+    session[:user_id] = nil
+    content_type :json
+    {redirect: '/'}.to_json
+  else
+    status 404
+  end
+end
