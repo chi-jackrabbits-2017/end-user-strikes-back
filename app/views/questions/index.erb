@@ -2,7 +2,17 @@
   <h2>Questions</h2>
 
   <% @questions.each do |question| %>
-    <% if question.author == current_user %>
+    <% if logged_in? %>
+      <div class="question-box">
+        <a href="/questions/<%= question.id %>/votes" class='upvote-button'>
+          <i class='fa fa-arrow-up'></i>
+        </a>
+        <ul class="questions-list">
+          <li><a class="question-display" href="/questions/<%= question.id %>"><%= question.title %></a></li>
+          <li><%= question.pretty_vote_count %></li>
+        </ul>
+      </div>
+    <% elsif question.author == current_user %>
       <div class="question-box">
         <ul class="questions-list">
           <li><a class="question-display" href="/questions/<%= question.id %>"><%= question.title %></a></li>
