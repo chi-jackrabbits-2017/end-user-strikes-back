@@ -39,6 +39,25 @@ th {
   border-bottom: 1px solid black;
 }
 
+.post-question-form {
+  width: 100%;
+}
+
+.questions-form li {
+  margin-left: -40px;
+  list-style-type: none;
+  padding: 5px;
+}
+
+.body-input: {
+  width: 200px;
+}
+
+
+.hide {
+  display: none;
+}
+
 .delete-button {
   border: none;
   color: white;
@@ -50,9 +69,35 @@ th {
   background: skyblue;
 }
 
+
 a.upvote-button, a.downvote-button{
   color: silver;
   text-decoration: none;
+
+.question-post-button {
+  border: none;
+  color: white;
+  background: black;
+}
+
+.question-post-button:hover {
+  color: white;
+  background: skyblue;
+}
+
+.question-form-post-button {
+  border: none;
+  color: white;
+  background: black;
+}
+
+.question-form-post-button:hover {
+  color: white;
+  background: skyblue;
+}
+
+th {
+  text-align: left;
 }
 
 a.upvote-button:hover, a.downvote-button:hover{
