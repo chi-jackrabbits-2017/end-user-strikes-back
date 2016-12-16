@@ -1,0 +1,12 @@
+<h2>Welcome, <%= @user.username %></h2>
+
+<h3>Here is a list of questions you have asked</h3>
+
+  <% @user_questions.each do |question| %>
+<ul>
+  <li><b>Title:</b> <%= question.title %></li>
+  <button type='button' class='show-more'>Show more!</button>
+  <li class='question-body'><b>Question:</b> <%= question.body %></li>
+</ul>
+<% end %>
+
