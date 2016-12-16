@@ -21,8 +21,9 @@ $(document).ready(function() {
     })
     .fail(function(response){
       $('.questions-container').prepend(response.responseText);
-    })
-  })
+    });
+  });
+
   $('.questions-container').on('click', '.delete-button', function(event){
     event.preventDefault();
     var question = $(this).closest('.question-box');
@@ -33,8 +34,8 @@ $(document).ready(function() {
       url: questionId
     }).done(function(response){
       $(question).remove();
-    })
-  })
+    });
+  });
 
   // Login Link Listener
   $('a#login').on('click', function(e){
@@ -64,6 +65,7 @@ $(document).ready(function() {
     logoutUser(this.href);
   });
 
+  // Vote button listeners
   $('.questions-container').on('click', '.upvote-button', createUpvote);
   $('.questions-container').on('click', '.downvote-button', createDownvote);
 

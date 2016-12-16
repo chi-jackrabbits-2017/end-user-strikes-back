@@ -20,6 +20,7 @@ post '/questions/:id/votes' do
         vote_flag: params[:vote_flag],
         voter_id: current_user.id
       )
+      question.pretty_vote_score
     else
       status 422
       "Unable to vote for the post. It may have been deleted since you've visted us."
