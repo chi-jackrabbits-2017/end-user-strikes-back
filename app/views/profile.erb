@@ -5,7 +5,8 @@
   <% @user_questions.each do |question| %>
 <ul>
   <li><b>Title:</b> <%= question.title %></li>
-  <li><b>Question:</b> <%= question.body %></li>
+  <button type='button' class='show-more'>Show more!</button>
+  <li class='question-body'><b>Question:</b> <%= question.body %></li>
 </ul>
 <% end %>
 
