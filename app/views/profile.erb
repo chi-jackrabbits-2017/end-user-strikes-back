@@ -10,6 +10,7 @@
   <% @question_answers.each do |answer| %>
   <% if answer.question_id == question.id %>
   <li class='question-answer'><b>Answer:</b> <%= answer.body %></li>
+  <button type='button' class='best-answer'>Best answer?</button>
      <% end %>
   <% end %>
 </ul>
