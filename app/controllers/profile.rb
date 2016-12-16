@@ -4,3 +4,7 @@ get '/user/:id' do
   @question_answers = Answer.where(:question_id => @user_questions.ids)
   erb :profile
 end
+
+put '/users/:id/questions/:id' do
+
+end
