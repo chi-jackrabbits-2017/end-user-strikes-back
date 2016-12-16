@@ -1,0 +1,13 @@
+<div class="questions-container">
+  <h2>Questions</h2>
+
+  <% @questions.each do |question| %>
+    <div class="question-box">
+      <ul class="questions-list">
+        <li><a class="question-display" href="#question route"><%= question.title %></a></li>
+      </ul>
+    </div>
+  <% end %>
+
+</div>
+
