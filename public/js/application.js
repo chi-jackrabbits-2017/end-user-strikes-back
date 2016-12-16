@@ -43,14 +43,25 @@ var createDownvote = function(e){
 };
 
 var createVote = function(voteFlag, that){
-  console.log(that.href);
+
+  // Removes any 'button clicked' styles from the children of a question
+  // Method chained together for readability.
+  $(that).closest('.button-holder')
+  .children()
+  .removeClass('vote-button-clicked');
+
+  // This will set the button color if it's been clicked
+  $(that).addClass('vote-button-clicked');
+
   $.ajax({
     url: that.href,
-    type: 'POST'
+    type: 'POST',
+    data: {vote_flag: voteFlag}
   })
   .done(function(voteCount){
-    console.log(that);
-  };
+    var $question = $(that).closest('.question-box');
+    $question.find('.vote-count').html(voteCount)
+  });
 }
 
 var getLoginForm = function(){
@@ -92,6 +103,6 @@ var logoutUser = function(url){
     url: url
   })
   .done(function(jsonResponse){
-    window.location.replace(jsonResponse.redirect)
+    window.location.replace(jsonResponse.redirect);
   });
 };

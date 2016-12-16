@@ -4,22 +4,26 @@
   <% @questions.each do |question| %>
     <% if logged_in? %>
       <div class="question-box">
-        <a href="/questions/<%= question.id %>/votes" class='upvote-button'>
-          <i class='fa fa-arrow-up' aria-hidden="true"></i>
-        </a><br>
-        <a href="/questions/<%= question.id %>/votes" class='downvote-button'>
-          <i class='fa fa-arrow-down' aria-hidden="true"></i>
-        </a>
         <ul class="questions-list">
-          <li><a class="question-display" href="/questions/<%= question.id %>"><%= question.title %></a></li>
-          <li><%= question.pretty_vote_count %></li>
+          <li>
+          <span class='button-holder'>
+            <a href="/questions/<%= question.id %>/votes" class='upvote-button'>
+              <i class='fa fa-arrow-up' aria-hidden="true"></i>
+            </a><br>
+            <a href="/questions/<%= question.id %>/votes" class='downvote-button'>
+              <i class='fa fa-arrow-down' aria-hidden="true"></i>
+            </a>
+            <span class='vote-count'><%= question.pretty_vote_score %></span>
+          </span>
+            <a class="question-display" href="/questions/<%= question.id %>"><%= question.title %></a>
+          </li>
         </ul>
       </div>
     <% elsif question.author == current_user %>
       <div class="question-box">
         <ul class="questions-list">
           <li><a class="question-display" href="/questions/<%= question.id %>"><%= question.title %></a></li>
-          <li><%= question.pretty_vote_count %></li>
+          <li><%= question.pretty_vote_score %></li>
           <li>
             <form method="post", action="/questions/<%= question.id %>">
               <input type="hidden" name="_method" value="delete">
@@ -32,7 +36,7 @@
       <div class="question-box">
         <ul class="questions-list">
           <li><a class="question-display" href="/questions/<%= question.id %>"><%= question.title %></a></li>
-          <li><%= question.pretty_vote_count %></li>
+          <li><%= question.pretty_vote_score %></li>
         </ul>
       </div>
     <% end %>

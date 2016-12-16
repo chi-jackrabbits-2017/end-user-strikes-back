@@ -51,10 +51,21 @@ th {
 }
 
 a.upvote-button, a.downvote-button{
-  color: black;
+  color: silver;
+  text-decoration: none;
 }
 
 a.upvote-button:hover, a.downvote-button:hover{
   color: chocolate;
+}
+
+a.vote-button-clicked {
+  color: chocolate;
+}
+
+.vote-count {
+  color: silver;
+  margin-left: 5px;
+  margin-right: 15px;
 }
 
