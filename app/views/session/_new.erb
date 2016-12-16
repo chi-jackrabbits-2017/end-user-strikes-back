@@ -1,5 +1,9 @@
+<% if error %>
+  <%= error %>
+<% end %>
+
 <form action='/sessions' method='post' id='login-form'>
-  <!-- Basic form data to serve. No variables needed so far. -->
+
   <label for='user[username]' class='input-input'>Username:</label>
   <input type='text' name='user[username]'>
   <label for='user[password]' class='input-label'>Password:</label>
