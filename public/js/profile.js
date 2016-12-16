@@ -1,9 +1,9 @@
 
 $(function(){
-  console.log("Hello!")
-  $(".question-body").hide();
-  $(".show-more").on('click', function(event) {
+  $(".question-body, .question-answer").hide();
+    $(".show-more").on('click', function(event) {
     event.preventDefault();
-    $(".question-body").show();
+    console.log(this)
+    $(this).siblings("li").show()
   });
 });

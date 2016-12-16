@@ -7,6 +7,11 @@
   <li><b>Title:</b> <%= question.title %></li>
   <button type='button' class='show-more'>Show more!</button>
   <li class='question-body'><b>Question:</b> <%= question.body %></li>
+  <% @question_answers.each do |answer| %>
+  <% if answer.question_id == question.id %>
+  <li class='question-answer'><b>Answer:</b> <%= answer.body %></li>
+     <% end %>
+  <% end %>
 </ul>
 <% end %>
 
