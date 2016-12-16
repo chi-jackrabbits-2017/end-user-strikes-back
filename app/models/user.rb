@@ -14,7 +14,12 @@ class User < ActiveRecord::Base
     self.hashed_password = @password
   end
 
-  def validate(args)
-    p args
+  def self.validate(args)
+    username = args.fetch("username")
+    password = args.fetch("password")
+    user = User.find_by(username: username)
+    if user && user.password == password
+      user
+    end
   end
 end

@@ -10,6 +10,15 @@ $(document).ready(function() {
       getLoginForm();
     }
   });
+
+  // Login form submission listener
+  $('div#form-catcher').on('submit', '#login-form', function(e){
+    e.preventDefault();
+
+    var data = $(this).serialize();
+    console.log(data)
+    submitFormToServer(data)
+  })
 });
 
 var getLoginForm = function(){
@@ -26,3 +35,20 @@ var getLoginForm = function(){
     $('div#form-catcher').html(response.responseText);
   });
 };
+
+var submitFormToServer = function(data){
+  $.ajax({
+    type: 'POST',
+    url: '/sessions',
+    data: data
+  })
+  .done(function(jsonResponse){
+    // This will redirect the user to home when the response code is valid
+    console.log("Here!");
+    window.location.replace(jsonResponse.redirect);
+  })
+  .fail(function(response){
+    // Resets the form and includes the errors this time.
+    $('#form-catcher').html(response.responseText);
+  });
+}
