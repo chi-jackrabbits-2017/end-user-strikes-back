@@ -4,7 +4,8 @@
   <% @questions.each do |question| %>
     <div class="question-box">
       <ul class="questions-list">
-        <li><a class="question-display" href="#question route"><%= question.title %></a></li>
+        <li><a class="question-display" href="/questions/<%= question.id %>"><%= question.title %></a></li>
+        <li><%= question.pretty_vote_count %></li>
       </ul>
     </div>
   <% end %>
