@@ -5,6 +5,8 @@ class Question < ActiveRecord::Base
   has_many :comments, as: :commentable
   has_many :answers
 
+  validates :title, :body, presence: true
+
   def pretty_vote_count
     self.votes.length.to_s + ' votes'
   end

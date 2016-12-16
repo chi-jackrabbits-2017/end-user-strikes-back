@@ -25,6 +25,43 @@ $(document).ready(function() {
     // Sends the logout request to the HREF of the link being clicked.
     logoutUser(this.href);
   });
+
+  $('.question-form-post-button').on('click', function(event){
+    event.preventDefault();
+    $(this).addClass('hide');
+    $('.post-question-form').removeClass('hide');
+  });
+
+  $('.questions-container').on('click', '.question-post-button', function(event){
+    event.preventDefault();
+
+    var questionInfo = $(this).closest('form').serialize();
+    $.ajax({
+      method: "POST",
+      url: "/questions",
+      data: questionInfo
+    })
+    .done(function(response){
+      $('.questions-container').prepend(response);
+      $('.post-question-form').addClass('hide');
+      $('.question-form-post-button').removeClass('hide');
+    })
+    .fail(function(response){
+      $('.questions-container').prepend(response.responseText);
+    })
+  })
+  $('.questions-container').on('click', '.delete-button', function(event){
+    event.preventDefault();
+    var question = $(this).closest('.question-box');
+    var questionId = $(this).closest('form').attr('action');
+
+    $.ajax({
+      method: "DELETE",
+      url: questionId
+    }).done(function(response){
+      $(question).remove();
+    })
+  })
 });
 
 var getLoginForm = function(){
@@ -69,3 +106,4 @@ var logoutUser = function(url){
     window.location.replace(jsonResponse.redirect)
   });
 };
+

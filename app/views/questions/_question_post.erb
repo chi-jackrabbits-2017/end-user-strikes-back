@@ -1,0 +1,12 @@
+<div class="question-box">
+  <ul class="questions-list">
+    <li><a class="question-display" href="/questions/<%= @question.id %>"><%= @question.title %></a></li>
+    <li><%= @question.pretty_vote_count %></li>
+    <li>
+      <form method="post", action="/questions/<%= @question.id %>">
+        <input type="hidden" name="_method" value="delete">
+        <button class="delete-button" type="submit">delete</button>
+      </form>
+    </li>
+  </ul>
+</div>
