@@ -16,8 +16,7 @@ $(document).ready(function() {
     e.preventDefault();
 
     var data = $(this).serialize();
-    console.log(data)
-    submitFormToServer(data)
+    loginUserIfValid(data)
   })
 
   $('a#logout').on('click', function(e){
@@ -38,12 +37,13 @@ var getLoginForm = function(){
     $('div#form-catcher').html(form);
   })
   .fail(function(response){
-    console.log(response.responseText);
+    (responseresponseText);
     $('div#form-catcher').html(response.responseText);
   });
 };
 
-var submitFormToServer = function(data){
+// Called from above. Logs in users.
+var loginUserIfValid = function(data){
   $.ajax({
     type: 'POST',
     url: '/sessions',
@@ -51,7 +51,6 @@ var submitFormToServer = function(data){
   })
   .done(function(jsonResponse){
     // This will redirect the user to home when the response code is valid
-    console.log("Here!");
     window.location.replace(jsonResponse.redirect);
   })
   .fail(function(response){
@@ -60,6 +59,7 @@ var submitFormToServer = function(data){
   });
 }
 
+// Called from above. Logs outs users.
 var logoutUser = function(url){
   $.ajax({
     type: 'DELETE',
