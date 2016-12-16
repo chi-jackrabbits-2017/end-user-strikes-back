@@ -13,6 +13,7 @@
 .questions-list li {
   margin-left: -40px;
   list-style-type: none;
+  padding: 5px;
 }
 
 .question-display {
@@ -34,6 +35,16 @@
   border-bottom: 1px solid black;
 }
 
+.delete-button {
+  border: none;
+  color: white;
+  background: black;
+}
+
+.delete-button:hover {
+  color: white;
+  background: skyblue;
+}
 
 th {
   text-align: left;

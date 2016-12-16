@@ -15,3 +15,17 @@ get '/questions/:id' do
   end
 end
 
+delete '/questions/:id' do
+  @question = Question.find_by(id: params[:id])
+  if @question
+    if logged_in? && current_user == @question.author
+      @question.destroy
+      redirect '/'
+    else
+      redirect '/'
+    end
+  else
+    redirect '/'
+  end
+end
+
