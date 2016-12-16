@@ -1,8 +1,8 @@
 <h2>New User Registration</h2>
 
 <% if @errors %>
-  <span><% @errors.each do |error| %></span>
-    <%= error %><br>
+  <% @errors.each do |error| %>
+    <span><%= error %><br></span>
   <% end %>
 <% end %>
 
