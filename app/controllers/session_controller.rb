@@ -14,7 +14,7 @@ post '/sessions' do
   # This route should refresh, so I'll have to do some weird stuff here.
   if request.xhr?
     if user = User.validate(params[:user])
-      # session[:user_id] = user.id
+      session[:user_id] = user.id
       content_type :json
       status 200
       {redirect: '/'}.to_json
