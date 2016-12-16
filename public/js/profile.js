@@ -3,6 +3,7 @@ $(function(){
     $(".show-more").on('click', function(event) {
     event.preventDefault();
     $(this).siblings("li, button").show()
+
   });
 });
 
@@ -10,8 +11,8 @@ $(function(){
    $(".best-answer").on('click', function(event) {
    var id = $(this).prev()
    var answer_id = id.attr('id')
-   console.log(answer_id)
-
+   var user_id = $("h2").attr('id')
+   var question_id = $(this).prev().prev().prev().attr('id');
 
    function setBestAnswer(){
     $.ajax({
