@@ -20,22 +20,23 @@
 </head>
 
 <body>
-<nav>
-    
-    <!-- Should be an if here for logged_in? (Imagine I wrote that) -->
-    <a href="/">Home</a> |
-    <% if logged_in? %>
-      <a href="/users/<%=current_user.id%>" id='current_user'><%= current_user.username %></a> |
-      <a href='/sessions/<%= current_user.id %>' id='logout'>Logout</a>
-    <% else %>
-     <a href="/users/new" id='register'>Register</a>
-    <% end %> |
-      <a href='' id='login'>Login</a>
-  </nav>
-  <div id='form-catcher'></div>
+
+  <div class="container">
+    <nav>
+      <a href="/">Home</a> |
+      <% if logged_in? %>
+        <a href="/users/<%=current_user.id%>" id='current_user'><%= current_user.username %></a> |
+        <a href='/sessions/<%= current_user.id %>' id='logout'>Logout</a>
+      <% else %>
+        <a href="/users/new" id='register'>Register</a> |
+        <a href='' id='login'>Login</a>
+      <% end %>
+    </nav>
+    <div id='form-catcher'></div>
+  </div>
   <div class='container'>
-<h3 class='nav-header'>End Users Strike Back</h3>
-  
+    <h3 class='nav-header'>End Users Strike Back</h3>
     <%= yield %>
+  </div>
 </body>
 </html>
