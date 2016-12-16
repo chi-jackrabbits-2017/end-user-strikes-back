@@ -5,6 +5,9 @@ class User < ActiveRecord::Base
   has_many :votes, foreign_key: :voter_id
   has_many :comments, foreign_key: :commenter_id
 
+ validates :username, uniqueness: true, presence: true
+ validates :email, uniqueness: true, presence: true
+  
   def password
     @password ||= BCrypt::Password.new(hashed_password)
   end
