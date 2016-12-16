@@ -35,23 +35,6 @@ post '/questions' do
       redirect '/errors/404'
     end
   end
-
-  #   if @question.save
-  #     if request.xhr?
-  #       @question
-  #       erb :'/questions/_question_post', layout: false
-  #     else
-  #       redirect '/'
-  #     end
-  #     redirect '/'
-  #   else
-  #     @questions = Question.order(created_at: :desc)
-  #     @errors = @question.errors.full_messages
-  #     erb :'questions/index', layout: false
-  #   end
-  # else
-  #   redirect '/'
-  # end
 end
 
 delete '/questions/:id' do

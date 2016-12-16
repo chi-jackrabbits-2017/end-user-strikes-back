@@ -50,6 +50,7 @@ $(document).ready(function() {
       $('.questions-container').prepend(response.responseText);
     })
   })
+  // $('.questions-container').on('click', '.delete-button', function())
 });
 
 var getLoginForm = function(){
