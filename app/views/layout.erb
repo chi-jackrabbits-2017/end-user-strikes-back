@@ -12,22 +12,26 @@
   -->
   <link rel="stylesheet" href="/css/application.css">
 
+  <link rel="stylesheet" href="/assets/font-awesome-4.7.0/css/font-awesome.min.css">
+
   <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
   <script src="/js/application.js"></script>
 
   <title>End User Strikes Back!</title>
 </head>
 <body>
-  <nav>
-    <h3 class='nav-header'>End Users Strike Back</h3>
-    <!-- Should be an if here for logged_in? (Imagine I wrote that) -->
-    <% if logged_in? %>
-      <a href='/sessions/<%= current_user.id %>' id='logout'>Logout</a>
-    <% else %>
-      <a href='' id='login'>Login</a>
-    <% end %>
-  </nav>
-  <div id='form-catcher'></div>
+  <div class="container">
+    <nav>
+      <h3 class='nav-header'>End Users Strike Back</h3>
+      <!-- Should be an if here for logged_in? (Imagine I wrote that) -->
+      <% if logged_in? %>
+        <a href='/sessions/<%= current_user.id %>' id='logout'>Logout</a>
+      <% else %>
+        <a href='' id='login'>Login</a>
+      <% end %>
+    </nav>
+    <div id='form-catcher'></div>
+  </div>
   <div class='container'>
     <%= yield %>
   </div>
