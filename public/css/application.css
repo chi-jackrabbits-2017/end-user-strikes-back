@@ -35,6 +35,22 @@
   border-bottom: 1px solid black;
 }
 
+.post-question-form {
+  width: 100%;
+}
+
+.questions-form li {
+  margin-left: -40px;
+  list-style-type: none;
+  padding: 5px;
+}
+
+
+/*
+.hide {
+  display: none;
+}*/
+
 .delete-button {
   border: none;
   color: white;
@@ -42,6 +58,17 @@
 }
 
 .delete-button:hover {
+  color: white;
+  background: skyblue;
+}
+
+.question-post-button {
+  border: none;
+  color: white;
+  background: black;
+}
+
+.question-post-button:hover {
   color: white;
   background: skyblue;
 }

@@ -15,6 +15,23 @@ get '/questions/:id' do
   end
 end
 
+post '/questions' do
+  @question = Question.new(params[:question])
+  @question.author = current_user
+
+  if logged_in?
+    if @question.save
+      redirect '/'
+    else
+      @questions = Question.order(created_at: :desc)
+      @errors = @question.errors.full_messages
+      erb :'questions/index'
+    end
+  else
+    redirect '/'
+  end
+end
+
 delete '/questions/:id' do
   @question = Question.find_by(id: params[:id])
   if @question
