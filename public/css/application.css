@@ -50,9 +50,11 @@ th {
   background: skyblue;
 }
 
-a.upvote-button{
-
+a.upvote-button, a.downvote-button{
+  color: black;
 }
 
-
+a.upvote-button:hover, a.downvote-button:hover{
+  color: chocolate;
+}
 

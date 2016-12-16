@@ -5,7 +5,10 @@
     <% if logged_in? %>
       <div class="question-box">
         <a href="/questions/<%= question.id %>/votes" class='upvote-button'>
-          <i class='fa fa-arrow-up'></i>
+          <i class='fa fa-arrow-up' aria-hidden="true"></i>
+        </a><br>
+        <a href="/questions/<%= question.id %>/votes" class='downvote-button'>
+          <i class='fa fa-arrow-down' aria-hidden="true"></i>
         </a>
         <ul class="questions-list">
           <li><a class="question-display" href="/questions/<%= question.id %>"><%= question.title %></a></li>

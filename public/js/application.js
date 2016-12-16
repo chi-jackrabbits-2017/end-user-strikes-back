@@ -25,7 +25,33 @@ $(document).ready(function() {
     // Sends the logout request to the HREF of the link being clicked.
     logoutUser(this.href);
   });
+
+  $('.questions-container').on('click', '.upvote-button', createUpvote);
+  $('.questions-container').on('click', '.downvote-button', createDownvote);
 });
+
+var createUpvote = function(e){
+  e.preventDefault();
+  var that = this;
+  createVote(true, that);
+};
+
+var createDownvote = function(e){
+  e.preventDefault();
+  var that = this;
+  createVote(false, that);
+};
+
+var createVote = function(voteFlag, that){
+  console.log(that.href);
+  $.ajax({
+    url: that.href,
+    type: 'POST'
+  })
+  .done(function(voteCount){
+    console.log(that);
+  };
+}
 
 var getLoginForm = function(){
   $.ajax({
