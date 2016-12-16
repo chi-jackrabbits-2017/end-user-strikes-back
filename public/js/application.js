@@ -96,4 +96,3 @@ var logoutUser = function(url){
   });
 };
 
-
