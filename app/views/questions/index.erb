@@ -1,5 +1,22 @@
+<h2>Questions</h2>
+
+<% if logged_in? %>
+  <span><button class="question-form-post-button" type="submit">post</button></span>
+<% end %>
+
 <div class="questions-container">
-  <h2>Questions</h2>
+
+  <% if logged_in? %>
+    <div class="post-question-form hide">
+      <ul class="questions-form">
+        <form method="post" action="/questions">
+          <li><input type="text" name="question[title]" placeholder="title"></li>
+          <li><input class="body-input" type="text" name="question[body]" placeholder="body"></li>
+          <li><button class="question-post-button" type="submit">post</button>
+        </form>
+      </ul>
+    </div>
+  <% end %>
 
   <% @questions.each do |question| %>
     <% if question.author == current_user %>
