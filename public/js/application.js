@@ -5,10 +5,10 @@ $(document).ready(function() {
     $('.post-question-form').removeClass('hide');
   });
 
-  $('.questions-container').on('click', '.question-post-button', function(event){
+  $('.post-question-form').on('submit', '#new_post_form', function(event){
     event.preventDefault();
 
-    var questionInfo = $(this).closest('form').serialize();
+    var questionInfo = $(this).serialize();
     $.ajax({
       method: "POST",
       url: "/questions",

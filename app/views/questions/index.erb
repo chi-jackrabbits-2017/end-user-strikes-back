@@ -7,7 +7,7 @@
 <% if logged_in? %>
   <div class="post-question-form hide">
     <ul class="questions-form">
-      <form method="post" action="/questions">
+      <form method="post" action="/questions" id='new_post_form'>
         <li><input type="text" name="question[title]" placeholder="title"></li>
         <li><input class="body-input" type="text" name="question[body]" placeholder="body"></li>
         <li><button class="question-post-button" type="submit">post</button>
