@@ -73,6 +73,7 @@ th {
 a.upvote-button, a.downvote-button{
   color: silver;
   text-decoration: none;
+}
 
 .question-post-button {
   border: none;
@@ -112,5 +113,6 @@ a.vote-button-clicked {
   color: silver;
   margin-left: 5px;
   margin-right: 15px;
+
 }
 

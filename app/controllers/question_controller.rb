@@ -22,7 +22,9 @@ post '/questions' do
   if @question.save && logged_in?
     if request.xhr?
       @question
-      erb :'/questions/_question_post', layout: false
+      erb :'/questions/_show_when_user_owns',
+          layout: false,
+          locals: {question: @question}
     else
       redirect '/'
     end
