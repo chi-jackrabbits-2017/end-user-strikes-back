@@ -1,0 +1,24 @@
+<!-- This is not a restful name for a partial I'm sure. -->
+
+<div class="question-box">
+  <ul class="questions-list">
+    <li>
+    <span class='button-holder'>
+      <a href="/questions/<%= question.id %>/votes" class='upvote-button'>
+        <i class='fa fa-arrow-up' aria-hidden="true"></i>
+      </a><br>
+      <a href="/questions/<%= question.id %>/votes" class='downvote-button'>
+        <i class='fa fa-arrow-down' aria-hidden="true"></i>
+      </a>
+      <span class='vote-count'><%= question.pretty_vote_score %></span>
+    </span>
+      <a class="question-display" href="/questions/<%= question.id %>"><%= question.title %></a>
+    </li>
+    <li>
+      <form method="post", action="/questions/<%= question.id %>">
+        <input type="hidden" name="_method" value="delete">
+        <button class="delete-button" type="submit">delete</button>
+      </form>
+    </li>
+  </ul>
+</div>

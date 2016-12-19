@@ -1,4 +1,42 @@
 $(document).ready(function() {
+  $('.question-form-post-button').on('click', function(event){
+    event.preventDefault();
+    $(this).addClass('hide');
+    $('.post-question-form').removeClass('hide');
+  });
+
+  $('.post-question-form').on('submit', '#new_post_form', function(event){
+    event.preventDefault();
+
+    var questionInfo = $(this).serialize();
+    $.ajax({
+      method: "POST",
+      url: "/questions",
+      data: questionInfo
+    })
+    .done(function(response){
+      $('.questions-container').prepend(response);
+      $('.post-question-form').addClass('hide');
+      $('.question-form-post-button').removeClass('hide');
+    })
+    .fail(function(response){
+      $('.questions-container').prepend(response.responseText);
+    });
+  });
+
+  $('.questions-container').on('click', '.delete-button', function(event){
+    event.preventDefault();
+    var question = $(this).closest('.question-box');
+    var questionId = $(this).closest('form').attr('action');
+
+    $.ajax({
+      method: "DELETE",
+      url: questionId
+    }).done(function(response){
+      $(question).remove();
+    });
+  });
+
   // Login Link Listener
   $('a#login').on('click', function(e){
     e.preventDefault();
@@ -19,6 +57,7 @@ $(document).ready(function() {
     loginUserIfValid(data)
   })
 
+  // Logout listener
   $('a#logout').on('click', function(e){
     e.preventDefault();
 
@@ -26,43 +65,45 @@ $(document).ready(function() {
     logoutUser(this.href);
   });
 
-  $('.question-form-post-button').on('click', function(event){
-    event.preventDefault();
-    $(this).addClass('hide');
-    $('.post-question-form').removeClass('hide');
-  });
+  // Vote button listeners
+  $('.questions-container').on('click', '.upvote-button', createUpvote);
+  $('.questions-container').on('click', '.downvote-button', createDownvote);
 
-  $('.questions-container').on('click', '.question-post-button', function(event){
-    event.preventDefault();
-
-    var questionInfo = $(this).closest('form').serialize();
-    $.ajax({
-      method: "POST",
-      url: "/questions",
-      data: questionInfo
-    })
-    .done(function(response){
-      $('.questions-container').prepend(response);
-      $('.post-question-form').addClass('hide');
-      $('.question-form-post-button').removeClass('hide');
-    })
-    .fail(function(response){
-      $('.questions-container').prepend(response.responseText);
-    })
-  })
-  $('.questions-container').on('click', '.delete-button', function(event){
-    event.preventDefault();
-    var question = $(this).closest('.question-box');
-    var questionId = $(this).closest('form').attr('action');
-
-    $.ajax({
-      method: "DELETE",
-      url: questionId
-    }).done(function(response){
-      $(question).remove();
-    })
-  })
 });
+
+var createUpvote = function(e){
+  e.preventDefault();
+  var that = this;
+  createVote(true, that);
+};
+
+var createDownvote = function(e){
+  e.preventDefault();
+  var that = this;
+  createVote(false, that);
+};
+
+var createVote = function(voteFlag, that){
+
+  // Removes any 'button clicked' styles from the children of a question
+  // Method chained together for readability.
+  $(that).closest('.button-holder')
+  .children()
+  .removeClass('vote-button-clicked');
+
+  // This will set the button color if it's been clicked
+  $(that).addClass('vote-button-clicked');
+
+  $.ajax({
+    url: that.href,
+    type: 'POST',
+    data: {vote_flag: voteFlag}
+  })
+  .done(function(voteCount){
+    var $question = $(that).closest('.question-box');
+    $question.find('.vote-count').html(voteCount)
+  });
+}
 
 var getLoginForm = function(){
   $.ajax({
@@ -103,7 +144,7 @@ var logoutUser = function(url){
     url: url
   })
   .done(function(jsonResponse){
-    window.location.replace(jsonResponse.redirect)
+    window.location.replace(jsonResponse.redirect);
   });
 };
 

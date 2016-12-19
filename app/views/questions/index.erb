@@ -4,39 +4,37 @@
   <span><button class="question-form-post-button" type="submit">post</button></span>
 <% end %>
 
-<div class="questions-container">
+<% if logged_in? %>
+  <div class="post-question-form hide">
+    <ul class="questions-form">
+      <form method="post" action="/questions" id='new_post_form'>
+        <li><input type="text" name="question[title]" placeholder="title"></li>
+        <li><input class="body-input" type="text" name="question[body]" placeholder="body"></li>
+        <li><button class="question-post-button" type="submit">post</button>
+      </form>
+    </ul>
+  </div>
+<% end %>
 
-  <% if logged_in? %>
-    <div class="post-question-form hide">
-      <ul class="questions-form">
-        <form method="post" action="/questions">
-          <li><input type="text" name="question[title]" placeholder="title"></li>
-          <li><input class="body-input" type="text" name="question[body]" placeholder="body"></li>
-          <li><button class="question-post-button" type="submit">post</button>
-        </form>
-      </ul>
-    </div>
-  <% end %>
+<div class="questions-container">
 
   <% @questions.each do |question| %>
     <% if question.author == current_user %>
-      <div class="question-box">
-        <ul class="questions-list">
-          <li><a class="question-display" href="/questions/<%= question.id %>"><%= question.title %></a></li>
-          <li><%= question.pretty_vote_count %></li>
-          <li>
-            <form method="post", action="/questions/<%= question.id %>">
-              <input type="hidden" name="_method" value="delete">
-              <button class="delete-button" type="submit">delete</button>
-            </form>
-          </li>
-        </ul>
-      </div>
+      <%= erb :'/questions/_show_when_user_owns', locals: {question: question} %>
+    <% elsif logged_in? %>
+      <%= erb :'/questions/_show_when_user_logged_in',
+              locals: {question: question} %>
     <% else %>
       <div class="question-box">
         <ul class="questions-list">
-          <li><a class="question-display" href="/questions/<%= question.id %>"><%= question.title %></a></li>
-          <li><%= question.pretty_vote_count %></li>
+          <li>
+            <span class='vote-count'>
+              <%= question.pretty_vote_score %>
+            </span>
+            <a class="question-display" href="/questions/<%= question.id %>">
+              <%= question.title %>
+            </a>
+          </li>
         </ul>
       </div>
     <% end %>
