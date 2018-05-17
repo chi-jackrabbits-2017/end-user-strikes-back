@@ -1,0 +1,19 @@
+<h2 id='<%= @user.id %>'>Welcome, <%= @user.username %></h2>
+
+<h3>Here is a list of questions you have asked</h3>
+
+  <% @user_questions.each do |question| %>
+<ul>
+  <li><b>Title:</b> <%= question.title %></li>
+  <button type='button' class='show-more'>Show more!</button>
+  <li class='question-body' id='<%= question.id %>'><b>Question:</b> <%= question.body %></li>
+  <% @question_answers.each do |answer| %>
+  <% if answer.question_id == question.id %>
+  <br>
+  <li class='question-answer' id='<%= answer.id %>'><b>Answer:</b> <%= answer.body %></li>
+  <button type='button' class='best-answer'>Best answer?</button>
+     <% end %>
+  <% end %>
+</ul>
+<% end %>
+
